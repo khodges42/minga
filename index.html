@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Minga connects engineers, designers, writers, organizers, and curious people with humanitarian free/open source software projects that need help." />
+  <title>Minga — useful code for people who need it</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="glow glow-a"></div><div class="glow glow-b"></div><div class="glow glow-c"></div>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Minga home"><span class="mark">✺</span><span>Minga</span></a>
+    <nav aria-label="Main navigation">
+      <a href="#projects">Projects</a>
+      <a href="#paths">Start</a>
+      <a href="#foss">FLOSS</a>
+      <a href="#agents">Agents</a>
+      <a href="https://github.com/khodges42" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://www.linkedin.com/in/khodges42" target="_blank" rel="noreferrer">LinkedIn</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero section">
+      <div class="hero-copy parallax" data-speed="0.06">
+        <p class="eyebrow">Free software. Mutual aid. Agents pointed at something useful.</p>
+        <h1>Minga helps people find humanitarian software worth contributing to.</h1>
+        <p class="lede">The Andean people have a wonderful term: <strong>minga</strong> — a community coming together to do work that helps everyone. Roads, crops, schools, clinics, the stuff that keeps life moving.</p>
+        <p class="lede small">This is that idea, aimed at free and open source software. Not a startup pitch. Not AI magic. Just a place to help engineers, designers, writers, translators, organizers, students, and curious weirdos find useful projects and start helping.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#paths">Find your path</a>
+          <a class="button ghost" href="#projects">Browse projects</a>
+        </div>
+      </div>
+      <aside class="hero-card parallax" data-speed="0.11" aria-label="Minga summary card">
+        <div class="card-sun">☀</div>
+        <h2>Small first missions</h2>
+        <ul>
+          <li>Use Codex or Claude to understand one issue.</li>
+          <li>Reproduce a bug and write what happened.</li>
+          <li>Clean up docs that block new contributors.</li>
+          <li>Translate, test, map, triage, explain.</li>
+        </ul>
+        <p>A lot of the software doing real public good is maintained by tired people with long lists. You can help without pretending to be a savior.</p>
+      </aside>
+    </section>
+
+    <section class="section intro-grid" id="paths">
+      <article class="panel big">
+        <p class="eyebrow">Start here</p>
+        <h2>Pick your trail. Do one useful thing.</h2>
+        <p>The point is not to become a perfect open source contributor this weekend. The point is to lower the weird activation energy. Read the docs. Find the issue tracker. Ask your agent to explain the code. Leave the project better than you found it.</p>
+      </article>
+      <article class="panel path-card">
+        <h3>Coders</h3>
+        <p>Use your normal engineering brain, plus agentic tools for repo exploration, test scaffolding, doc cleanup, and issue triage.</p>
+        <a href="#coders">Engineer guide →</a>
+      </article>
+      <article class="panel path-card">
+        <h3>Not-coders / almost-coders / chaos gremlins</h3>
+        <p>You can still help. Projects need translators, testers, writers, designers, screenshots, reproduction steps, accessibility notes, and onboarding polish.</p>
+        <a href="#noncoders">Non-coder guide →</a>
+      </article>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Project directory</p>
+          <h2>Humanitarian FLOSS projects that could use hands.</h2>
+        </div>
+        <p>Filter by cause, tech, or contribution style. Then use the prompts below to find one small, real thing to do.</p>
+      </div>
+
+      <div class="filters" role="region" aria-label="Project filters">
+        <label>Cause
+          <select id="causeFilter"><option value="all">All causes</option></select>
+        </label>
+        <label>Skill
+          <select id="skillFilter"><option value="all">All skills</option></select>
+        </label>
+        <label>Tech
+          <select id="techFilter"><option value="all">All tech</option></select>
+        </label>
+        <label class="search-label">Search
+          <input id="searchFilter" type="search" placeholder="health, Python, docs, mapping…" />
+        </label>
+      </div>
+      <div id="projectGrid" class="project-grid"></div>
+    </section>
+
+    <section class="section split" id="coders">
+      <div class="panel warm">
+        <p class="eyebrow">For engineers</p>
+        <h2>Map your specialty to useful work.</h2>
+        <p>Don’t start by asking “what heroic thing can I build?” Start by asking what the maintainer already needs.</p>
+        <div class="skill-map" id="skillMap"></div>
+      </div>
+      <div class="panel prompt-box">
+        <h3>Prompt: find a sane first issue</h3>
+        <pre><code>I'm looking at this FLOSS humanitarian project: [repo URL].
+Act like a careful senior engineer onboarding me.
+
+1. Summarize what the project does in plain English.
+2. Identify the main languages, frameworks, test commands, and contribution rules.
+3. Find 5 issues that look safe for a first contribution.
+4. Reject issues that require production access, private context, or vague product decisions.
+5. For the best issue, give me a tiny plan: files to inspect, commands to run, risks, and how to ask a good maintainer question.</code></pre>
+      </div>
+    </section>
+
+    <section class="section split" id="noncoders">
+      <div class="panel prompt-box">
+        <h3>Prompt: help without pretending to code</h3>
+        <pre><code>I'm not trying to write a big code change.
+Look at this project: [site or repo URL].
+Find 10 useful non-code contributions.
+Prioritize docs, screenshots, translations, bug reproduction, accessibility, confusing onboarding steps, broken links, and issue triage.
+For each one, explain exactly what I can do in under an hour.</code></pre>
+      </div>
+      <div class="panel warm">
+        <p class="eyebrow">For non-coders</p>
+        <h2>Useful work is not fake work.</h2>
+        <p>Open source runs on the boring glue. A clear bug report can save a maintainer an evening. A fixed setup guide can unblock the next ten contributors. A translation can make a tool usable by people who actually need it.</p>
+        <div class="missions">
+          <span>Translate one page</span><span>Reproduce one bug</span><span>Test mobile layout</span><span>Improve README setup</span><span>Add screenshots</span><span>Check accessibility</span><span>Write a glossary</span><span>Label stale issues</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="foss">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Why FLOSS matters</p>
+          <h2>Free software is repairable infrastructure.</h2>
+        </div>
+        <p>This is the practical version. Not a sermon.</p>
+      </div>
+      <div class="foss-grid">
+        <article class="panel"><h3>GNU</h3><p>GNU is a long-running free software project and philosophy. The core idea is that users should be able to run, study, share, and modify the software they rely on.</p></article>
+        <article class="panel"><h3>GPL</h3><p>The GPL is a license that keeps software free by requiring modified versions to preserve the same freedoms. It is one way to stop public-good code from being quietly enclosed.</p></article>
+        <article class="panel"><h3>FOSS / FLOSS</h3><p>Free and open source software means people can inspect it, repair it, adapt it, and keep it alive after vendors disappear or budgets collapse.</p></article>
+        <article class="panel"><h3>Mutual aid</h3><p>Mutual aid is people helping each other directly. In software, that can be translation, bug fixes, deployment help, docs, testing, maps, datasets, or just showing up reliably.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="agents">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Agentic coding setup</p>
+          <h2>Use the robot. Don’t trust the robot.</h2>
+        </div>
+        <p>Codex, Claude Code, and similar tools are great at reducing friction. They are not maintainers, clinicians, disaster responders, or accountability.</p>
+      </div>
+      <div class="steps">
+        <article class="step"><span>01</span><h3>Clone and read</h3><p>Ask the agent to summarize architecture, contribution rules, tests, and safe entry points. Make it cite files.</p></article>
+        <article class="step"><span>02</span><h3>Use small loops</h3><p>One issue. One branch. One failing test. One fix. Avoid giant “AI refactors” unless maintainers ask for them.</p></article>
+        <article class="step"><span>03</span><h3>Validate everything</h3><p>Run tests. Read diffs. Check licenses. Remove generated nonsense. Humanitarian software deserves boring correctness.</p></article>
+        <article class="step"><span>04</span><h3>Be kind to maintainers</h3><p>Good PRs explain why, how tested, screenshots if relevant, and what you intentionally did not change.</p></article>
+      </div>
+    </section>
+
+    <section class="section credits">
+      <div class="panel big">
+        <p class="eyebrow">About this list</p>
+        <h2>Built as a starting point, not a holy canon.</h2>
+        <p>Projects change. Some repos are more active than others. Some need code. Some need docs. Some need governance, money, translators, or patient issue triage. Check the project’s own contribution rules before charging in with a huge PR.</p>
+        <p class="source-note">Directory descriptions are based on each project’s own public docs/sites where possible. Links go straight to the project or repo so people can verify before contributing.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div><strong>Minga</strong><br/>Useful code. Real people. Small first missions.</div>
+    <div class="footer-links"><a href="https://github.com/khodges42" target="_blank" rel="noreferrer">github.com/khodges42</a><a href="https://www.linkedin.com/in/khodges42" target="_blank" rel="noreferrer">LinkedIn / khodges42</a></div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
